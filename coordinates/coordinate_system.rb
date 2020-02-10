@@ -70,11 +70,11 @@ class Camera
     end
 
     def zoom_in
-        @zoom -= zoom_delta
+        @zoom += zoom_delta
     end
 
     def zoom_out
-        @zoom += zoom_delta
+        @zoom -= zoom_delta
     end
 
     def pan_left
@@ -100,7 +100,6 @@ class Camera
     end
 
     def draw_crosshair
-        puts( "x: #{@x} / y: #{@y}" )
         @window.draw_line(
             @x - 10, @y, Gosu::Color::YELLOW,
             @x + 10, @y, Gosu::Color::YELLOW, 100 )
