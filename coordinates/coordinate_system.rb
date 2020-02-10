@@ -65,6 +65,25 @@ class Camera
         [x0, x1, y0, y1]
     end
 
+    def zoom_in
+        @zoom -= zoom_delta
+    end
+
+    def zoom_out
+        @zoom += zoom_delta
+    end
+
+    def to_s
+        "FPS: #{Gosu.fps}. " <<
+         "#{@x}:#{@y} @ #{'%.2f' % @zoom}. " <<
+         'WASD to move, arrows to zoom.'
+    end
+
+    private
+
+    def zoom_delta
+        @zoom > 0 ? 0.01 : 1.0
+    end
 end
 
 class GameWindow < Gosu::Window
@@ -86,6 +105,14 @@ class GameWindow < Gosu::Window
         true
     end
 
+    def update
+        
+        @camera.zoom_in if button_down?( Gosu::KbUp )
+        @camera.zoom_out if button_down?( Gosu::KbDown )
+        self.caption = @camera.to_s
+        
+    end
+
     def draw
         @map.draw( @camera )
         draw_count_of_objects_on_and_off_screen
@@ -98,7 +125,7 @@ class GameWindow < Gosu::Window
             "#{@map.on_screen} / #{@map.off_screen}"
         info_image = Gosu::Image.from_text( 
             info, 30, { :font => Gosu.default_font_name } )
-        info_image.draw(10, 10, 1)
+        info_image.draw( 10, 10, 1 )
     end
 
 end
