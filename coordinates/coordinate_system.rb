@@ -50,9 +50,13 @@ class Camera
     attr_reader :x, :y, :zoom
 
     def initialize( game_window )
+        @window = game_window
+        initialize_camera_position
+    end
+
+    def initialize_camera_position
         @x = @y = 0
         @zoom = 1
-        @window = game_window
     end
 
     def canView?( x, y, object )
@@ -139,6 +143,7 @@ class GameWindow < Gosu::Window
 
     def button_down( id )
         close if id == Gosu::KbEscape
+        @camera.initialize_camera_position if id == Gosu::KbSpace
     end
 
     def needs_cursor?
