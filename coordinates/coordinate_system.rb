@@ -45,6 +45,10 @@ end
 
 class Camera
 
+    SPEED = 10
+
+    attr_reader :x, :y, :zoom
+
     def initialize( game_window )
         @x = @y = 0
         @zoom = 1
@@ -73,10 +77,45 @@ class Camera
         @zoom += zoom_delta
     end
 
+    def pan_left
+        @x -= SPEED
+    end
+
+    def pan_right
+        @x += SPEED
+    end
+
+    def pan_up
+        @y -= SPEED
+    end
+
+    def pan_down
+        @y += SPEED
+    end
+
     def to_s
         "FPS: #{Gosu.fps}. " <<
          "#{@x}:#{@y} @ #{'%.2f' % @zoom}. " <<
          'WASD to move, arrows to zoom.'
+    end
+
+    def draw_crosshair
+        @window.draw_line(
+            @x - 10, @y, Gosu::Color::YELLOW,
+            @x + 10, @y, Gosu::Color::YELLOW, 100 )
+        @window.draw_line(
+            @x, @y - 10, Gosu::Color::YELLOW,
+            @x, @y + 10, Gosu::Color::YELLOW, 100 )
+    end
+    
+    def draw_viewport_over( map )
+        x_offset = @x + @window.width / 2
+        y_offset = @y + @window.height / 2
+        @window.translate(x_offset, y_offset) do
+            @window.scale( @zoom, @zoom, @x, @y ) do
+                map.draw( self )
+            end
+        end
     end
 
     private
@@ -107,14 +146,19 @@ class GameWindow < Gosu::Window
 
     def update
         
+        @camera.pan_left if button_down?( Gosu::KbA )
+        @camera.pan_right if button_down?( Gosu::KbD )
+        @camera.pan_up if button_down?( Gosu::KbW )
+        @camera.pan_down if button_down?( Gosu::KbS )
         @camera.zoom_in if button_down?( Gosu::KbUp )
         @camera.zoom_out if button_down?( Gosu::KbDown )
         self.caption = @camera.to_s
-        
+
     end
 
     def draw
-        @map.draw( @camera )
+        @camera.draw_crosshair
+        @camera.draw_viewport_over( @map )
         draw_count_of_objects_on_and_off_screen
     end
 
