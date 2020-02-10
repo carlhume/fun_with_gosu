@@ -57,8 +57,8 @@ class Camera
 
     def canView?( x, y, object )
         x0, x1, y0, y1 = viewport
-        (x0 - object.width..x1).include?(x) &&
-            (y0 - object.height..y1).include?(y)
+        ( x0 - object.width..x1 ).include?( x ) &&
+            ( y0 - object.height..y1 ).include?( y )
     end
 
     def viewport
@@ -100,6 +100,7 @@ class Camera
     end
 
     def draw_crosshair
+        puts( "x: #{@x} / y: #{@y}" )
         @window.draw_line(
             @x - 10, @y, Gosu::Color::YELLOW,
             @x + 10, @y, Gosu::Color::YELLOW, 100 )
@@ -109,9 +110,10 @@ class Camera
     end
     
     def draw_viewport_over( map )
-        x_offset = @x + @window.width / 2
-        y_offset = @y + @window.height / 2
-        @window.translate(x_offset, y_offset) do
+        x_offset = -@x + @window.width / 2
+        y_offset = -@y + @window.height / 2
+        @window.translate( x_offset, y_offset ) do
+            draw_crosshair
             @window.scale( @zoom, @zoom, @x, @y ) do
                 map.draw( self )
             end
@@ -157,7 +159,6 @@ class GameWindow < Gosu::Window
     end
 
     def draw
-        @camera.draw_crosshair
         @camera.draw_viewport_over( @map )
         draw_count_of_objects_on_and_off_screen
     end
