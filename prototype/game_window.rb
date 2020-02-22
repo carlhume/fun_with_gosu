@@ -6,6 +6,10 @@ class GameWindow < Gosu::Window
         super( 800, 600, false )
     end
 
+    def update
+        @screen.update
+    end
+
     def draw
         @screen.draw
     end

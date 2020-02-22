@@ -4,7 +4,7 @@ class Menu
         @window = game_window
         @repository = media_repository
         @message = Gosu::Image.from_text( 
-            'Tanks Prototype!', 100, { :font => Gosu.default_font_name } )
+            'Tanks Prototype!', 30, { :font => Gosu.default_font_name } )
     end
 
     def enter
@@ -16,10 +16,20 @@ class Menu
         @music ||= @repository.find_song( 'menu_music.mp3' )
     end
 
+    def update
+        @info = Gosu::Image.from_text( 
+            "Q = Quit, N = New Game", 30, { :font => Gosu.default_font_name } ) 
+    end
+
     def draw
         @message.draw( 
             @window.width / 2 - @message.width / 2,
             @window.height / 2 - @message.height / 2, 
+            10
+        )
+        @info.draw( 
+            @window.width / 2 - @info.width / 2,
+            @window.height / 2 - @info.height / 2 + (@message.height + @info.height), 
             10
         )
     end
