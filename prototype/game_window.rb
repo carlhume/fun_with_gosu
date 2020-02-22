@@ -1,13 +1,13 @@
 class GameWindow < Gosu::Window
 
-    attr_accessor :state
-    
+    attr_accessor :screen
+
     def initialize
         super( 800, 600, false )
     end
 
     def draw
-        @state.draw
+        @screen.draw
     end
 
     def needs_cursor?
