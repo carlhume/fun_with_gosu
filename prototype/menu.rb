@@ -24,4 +24,7 @@ class Menu
         )
     end
 
+    def button_down( id )
+    end
+
 end

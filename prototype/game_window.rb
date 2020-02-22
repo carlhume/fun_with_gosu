@@ -14,4 +14,9 @@ class GameWindow < Gosu::Window
         true
     end
 
+    def button_down( id )
+        close if id == Gosu::KbQ
+        @screen.button_down( id )
+    end
+
 end
