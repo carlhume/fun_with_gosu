@@ -1,8 +1,7 @@
-class Menu
+class Menu < Screen
 
-    def initialize( game_window, media_repository )
-        @window = game_window
-        @repository = media_repository
+    def initialize( game )
+        @game = game
         @message = Gosu::Image.from_text( 
             'Tanks Prototype!', 30, { :font => Gosu.default_font_name } )
     end
@@ -13,7 +12,7 @@ class Menu
     end
 
     def music
-        @music ||= @repository.find_song( 'menu_music.mp3' )
+        @music ||= @game.repository.find_song( 'menu_music.mp3' )
     end
 
     def update
@@ -23,18 +22,20 @@ class Menu
 
     def draw
         @message.draw( 
-            @window.width / 2 - @message.width / 2,
-            @window.height / 2 - @message.height / 2, 
+            @game.window.width / 2 - @message.width / 2,
+            @game.window.height / 2 - @message.height / 2, 
             10
         )
         @info.draw( 
-            @window.width / 2 - @info.width / 2,
-            @window.height / 2 - @info.height / 2 + (@message.height + @info.height), 
+            @game.window.width / 2 - @info.width / 2,
+            @game.window.height / 2 - @info.height / 2 + (@message.height + @info.height), 
             10
         )
     end
 
     def button_down( id )
+        @game.window.close if id == Gosu::KbQ
+        @game.start_new_game if id == Gosu::KbN
     end
 
 end

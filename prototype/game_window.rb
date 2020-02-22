@@ -1,7 +1,5 @@
 class GameWindow < Gosu::Window
 
-    attr_accessor :screen
-
     def initialize
         super( 800, 600, false )
     end
@@ -19,8 +17,12 @@ class GameWindow < Gosu::Window
     end
 
     def button_down( id )
-        close if id == Gosu::KbQ
         @screen.button_down( id )
     end
 
+    def show_screen( screen ) 
+        @screen = screen
+        @screen.enter
+    end
+    
 end
