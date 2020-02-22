@@ -16,7 +16,6 @@ class Menu
         @music ||= @repository.find_song( 'menu_music.mp3' )
     end
 
-
     def draw
         @message.draw( 
             @window.width / 2 - @message.width / 2,
