@@ -1,12 +1,8 @@
 class Menu
 
-    MEDIA_DIRECTORY_NAME = 'prototype/media'
-    def find_media_file( filename )
-        File.join( File.dirname( File.dirname(__FILE__) ), MEDIA_DIRECTORY_NAME, filename )
-    end
-
-    def initialize( game_window )
+    def initialize( game_window, media_repository )
         @window = game_window
+        @repository = media_repository
         @message = Gosu::Image.from_text( 
             'Tanks Prototype!', 100, { :font => Gosu.default_font_name } )
     end
@@ -17,7 +13,7 @@ class Menu
     end
 
     def music
-        @music ||= Gosu::Song.new( find_media_file( 'menu_music.mp3' ) )
+        @music ||= @repository.find_song( 'menu_music.mp3' )
     end
 
 
