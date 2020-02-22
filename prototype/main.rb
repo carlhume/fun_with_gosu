@@ -4,4 +4,5 @@ require_relative 'menu'
 
 @window = GameWindow.new
 @window.screen = Menu.new( @window )
+@window.screen.enter
 @window.show
