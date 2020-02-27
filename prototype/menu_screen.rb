@@ -37,6 +37,7 @@ class MenuScreen < Screen
     def button_down( id )
         super( id )
         @game.start_new_game if id == Gosu::KbN
+        @game.continue_game if id == Gosu::KbC
     end
 
 end

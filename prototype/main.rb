@@ -19,7 +19,7 @@ class Game
 
     def start_new_game
         @play_screen = PlayScreen.new( self )
-        @window.show_screen( @play_screen )
+        continue_game
     end
 
     def has_started
@@ -28,6 +28,10 @@ class Game
 
     def show_menu
         @window.show_screen( @menu_screen )
+    end
+
+    def continue_game
+        @window.show_screen( @play_screen )
     end
     
 end
