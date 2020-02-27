@@ -21,6 +21,7 @@ class GameWindow < Gosu::Window
     end
 
     def show_screen( screen ) 
+        @screen.hide if not @screen.nil? 
         @screen = screen
         @screen.show
     end

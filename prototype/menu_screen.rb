@@ -11,6 +11,11 @@ class MenuScreen < Screen
         music.volume = 1
     end
 
+    def hide
+        music.volume = 0
+        music.stop
+    end
+
     def music
         @music ||= @game.repository.find_song( 'menu_music.mp3' )
     end

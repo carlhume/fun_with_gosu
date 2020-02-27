@@ -7,6 +7,9 @@ class Screen
     def show
     end
 
+    def hide
+    end
+
     def update
     end
 
