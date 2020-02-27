@@ -6,7 +6,7 @@ class MenuScreen < Screen
             'Tanks Prototype!', 30, { :font => Gosu.default_font_name } )
     end
 
-    def enter
+    def show
         music.play( true )
         music.volume = 1
     end

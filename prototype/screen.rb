@@ -4,7 +4,7 @@ class Screen
         @game = game
     end
 
-    def enter
+    def show
     end
 
     def update

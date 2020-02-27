@@ -22,7 +22,7 @@ class GameWindow < Gosu::Window
 
     def show_screen( screen ) 
         @screen = screen
-        @screen.enter
+        @screen.show
     end
     
 end
