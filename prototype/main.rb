@@ -22,6 +22,14 @@ class Game
         @window.show_screen( @play_screen )
     end
 
+    def has_started
+        @play_screen
+    end
+
+    def show_menu
+        @window.show_screen( @menu_screen )
+    end
+    
 end
 
 @game = Game.new

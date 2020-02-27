@@ -16,8 +16,9 @@ class MenuScreen < Screen
     end
 
     def update
+        continue_text = @game.has_started ? "C = Continue, " : ""
         @info = Gosu::Image.from_text( 
-            "Q = Quit, N = New Game", 30, { :font => Gosu.default_font_name } ) 
+            "Q = Quit, #{continue_text} N = New Game", 30, { :font => Gosu.default_font_name } ) 
     end
 
     def draw
@@ -34,7 +35,7 @@ class MenuScreen < Screen
     end
 
     def button_down( id )
-        @game.window.close if id == Gosu::KbQ
+        super( id )
         @game.start_new_game if id == Gosu::KbN
     end
 
