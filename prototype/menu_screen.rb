@@ -1,7 +1,7 @@
 class MenuScreen < Screen
 
     def initialize( game )
-        @game = game
+        super( game )
         @message = Gosu::Image.from_text( 
             'Tanks Prototype!', 30, { :font => Gosu.default_font_name } )
     end

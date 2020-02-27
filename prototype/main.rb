@@ -18,7 +18,7 @@ class Game
     end
 
     def start_new_game
-        @play_screen = PlayScreen.new
+        @play_screen = PlayScreen.new( self )
         @window.show_screen( @play_screen )
     end
 
