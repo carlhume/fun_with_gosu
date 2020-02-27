@@ -1,4 +1,4 @@
-class Menu < Screen
+class MenuScreen < Screen
 
     def initialize( game )
         @game = game

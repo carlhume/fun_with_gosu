@@ -1,7 +1,7 @@
 require 'gosu'
 require_relative 'screen'
 require_relative 'game_window'
-require_relative 'menu'
+require_relative 'menu_screen'
 require_relative 'media_repository'
 require_relative 'play_screen'
 
@@ -12,8 +12,8 @@ class Game
     def initialize
         @window = GameWindow.new
         @repository = MediaRepository.new
-        @menu = Menu.new( self )
-        @window.show_screen( @menu )
+        @menu_screen = MenuScreen.new( self )
+        @window.show_screen( @menu_screen )
         @window.show
     end
 
