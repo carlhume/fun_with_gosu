@@ -1,11 +1,13 @@
 require_relative 'camera'
 require_relative 'map'
+require_relative 'tank'
 
 class PlayScreen < Screen
 
     def initialize( game )
         super( game )
-        @camera = Camera.new
+        @tank = Tank.new( game )
+        @camera = Camera.new( game, @tank )
         @map = Map.new( game )
     end
 
