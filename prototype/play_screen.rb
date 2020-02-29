@@ -18,7 +18,7 @@ class PlayScreen < Screen
 
     def draw
         @map.draw( @camera )
-        @camera.draw_crosshair
+        draw_crosshair
     end
 
     def button_down( id )
@@ -26,4 +26,17 @@ class PlayScreen < Screen
         @game.show_menu if id == Gosu::KbEscape
     end
 
+    private
+
+    def draw_crosshair
+        x = @game.window.mouse_x
+        y = @game.window.mouse_y
+        @game.window.draw_line(
+            x - 10, y, Gosu::Color::RED,
+            x + 10, y, Gosu::Color::RED, 100 )
+        @game.window.draw_line(
+            x, y - 10, Gosu::Color::RED,
+            x, y + 10, Gosu::Color::RED, 100 )
+    end
+    
 end
