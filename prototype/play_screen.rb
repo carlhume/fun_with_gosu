@@ -18,6 +18,7 @@ class PlayScreen < Screen
 
     def draw
         @map.draw( @camera )
+        @camera.draw_crosshair
     end
 
     def button_down( id )
