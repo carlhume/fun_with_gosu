@@ -12,8 +12,8 @@ class PlayScreen < Screen
     end
 
     def update
-        @game.window.caption = 
-            "Tanks Prototype! [FPS: #{Gosu.fps}]."
+        @camera.update
+        @game.window.caption = "Tanks Prototype! [FPS: #{Gosu.fps}]."
     end
 
     def draw
